@@ -5,6 +5,8 @@ from catboost import CatBoostClassifier
 from azure.storage.blob import BlobServiceClient
 from flask_cors import CORS
 import os
+import tempfile
+import shutil
 
 ###############################################################################
 
@@ -42,13 +44,24 @@ def predict():
     blob_client = blob_service_client.get_blob_client(container=container_name, blob=blob_name)
     blob_data = blob_client.download_blob()
     model_data = blob_data.readall()
+    
+    # Create a temporary directory to store the model
+    temp_dir = tempfile.mkdtemp()
 
+    # Save the model data to the temporary directory
+    model_path = os.path.join(temp_dir, 'model.cbm')
+    with open(model_path, 'wb') as model_file:
+        model_file.write(model_data)
+    
     # Log when the model has been loaded
     print("Model loaded successfully")
     
     # Load the model from the downloaded data
     model = CatBoostClassifier()
     model.load_model(model_data)
+    
+    # Ensure the temporary directory is cleaned up
+    shutil.rmtree(temp_dir)
     
     if model is None:
         return jsonify({'error': f'Model for team {team} not found.'})
