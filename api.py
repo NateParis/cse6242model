@@ -4,6 +4,7 @@ from flask import Flask, request, jsonify
 from catboost import CatBoostClassifier
 from azure.storage.blob import BlobServiceClient
 from flask_cors import CORS
+import os
 
 ###############################################################################
 
@@ -65,5 +66,5 @@ def predict():
     return jsonify({'predicted_plays': playcall_labels.tolist(), 'predicted_probs': playcall_probs.tolist()})
 
 if __name__ == '__main':
-    app.run()                           # For local testing
-    #app.run(host='0.0.0.0', port=7400) # For running online
+    ##app.run()                           # For local testing
+    app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 5000))) # For running online
