@@ -61,5 +61,5 @@ def predict():
     return jsonify({'predicted_plays': playcall_labels.tolist(), 'predicted_probs': playcall_probs.tolist()})
 
 if __name__ == '__main':
-    #app.run(debug=True)                 # For local testing
-    app.run(host='0.0.0.0', port=7400) # For running online
+    app.run(debug=True)                 # For local testing
+    #app.run(host='0.0.0.0', port=7400) # For running online
