@@ -45,20 +45,17 @@ def predict():
     blob_data = blob_client.download_blob()
     model_data = blob_data.readall()
     
-    # Create a temporary directory to store the model
-    temp_dir = tempfile.mkdtemp()
-
-    # Save the model data to the temporary directory
-    model_path = os.path.join(temp_dir, 'model.cbm')
-    with open(model_path, 'wb') as model_file:
-        model_file.write(model_data)
-    
-    # Log when the model has been loaded
-    print("Model loaded successfully")
-    
-    # Load the model from the downloaded data
-    model = CatBoostClassifier()
-    model.load_model(model_data)
+    # Create a temporary directory
+    with tempfile.TemporaryDirectory() as temp_dir:
+        # Create a temporary model file in the directory
+        temp_model_path = os.path.join(temp_dir, 'temp_model.cbm')
+        
+        with open(temp_model_path, 'wb') as temp_model_file:
+            temp_model_file.write(model_data)
+        
+        # Load the model from the temporary file
+        model = CatBoostClassifier()
+        model.load_model(temp_model_path)
     
     # Ensure the temporary directory is cleaned up
     shutil.rmtree(temp_dir)
