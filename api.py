@@ -11,7 +11,8 @@ import os
 app = Flask(__name__)
 #CORS(app, resources={r"/predict": {"origins": "https://nateparis.github.io/"}})
 #CORS(app, resources={r"/predict": {"origins": "*"}})
-CORS(app, resources={r"/predict": {"origins": "https://nateparis.github.io/"}, "allow_headers": "Content-Type"})
+CORS(app, resources={r"/predict": {"origins": "https://nateparis.github.io"}, "allow_headers": "Content-Type"})
+
 
 # Initialize Azure Blob Service Client
 connection_string = 'DefaultEndpointsProtocol=https;AccountName=cse6242project;AccountKey=Tlh4dR/uMwY2IMui9+NT0MCsLd77UJjSM8VZGJcEVu3ZOhJOo9xzuyf3tknNB+bYoUo2LOr/fqB8+AStbmeRlQ==;EndpointSuffix=core.windows.net'
