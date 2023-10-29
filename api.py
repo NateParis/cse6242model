@@ -73,7 +73,7 @@ def predict():
     
     # Process the input data and make predictions
     playcall_labels = model.classes_
-    playcall_probs = model.predict_proba(input_df.drop('posteam', axis=1))
+    playcall_probs = model.predict_proba(input_df)
     
     # Log when predictions have been made
     print("Predictions made successfully")
