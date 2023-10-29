@@ -9,7 +9,7 @@ import os
 ###############################################################################
 
 app = Flask(__name)
-CORS(app, resources={r"/predict": {"origins": "*"}})
+CORS(app, resources={r"/predict": {"origins": "https://nateparis.github.io"}})
 
 
 # Initialize Azure Blob Service Client
@@ -63,5 +63,5 @@ def predict():
     return jsonify({'predicted_plays': playcall_labels.tolist(), 'predicted_probs': playcall_probs.tolist()})
 
 if __name__ == '__main__':
-    ##app.run()                           # For local testing
+    #app.run()                           # For local testing
     app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 5000))) # For running online
