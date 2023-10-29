@@ -32,9 +32,6 @@ def load_model(team):
     return model.load_model(model_data)
     
 
-@app.round('/')
-def home():
-    return "it's here"
 
 @app.route('/predict', methods=['Post'])
 def predict():
