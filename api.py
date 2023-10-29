@@ -19,19 +19,6 @@ connection_string = 'DefaultEndpointsProtocol=https;AccountName=cse6242project;A
 blob_service_client = BlobServiceClient.from_connection_string(connection_string)
 container_name = 'catboost-models' 
 
-
-def load_model(team):
-    # Generate the blob name for the model
-    blob_name = f"{team}_classifier.cbm"
-
-    # Download the model from Azure Blob Storage
-    blob_client = blob_service_client.get_blob_client(container=container_name, blob=blob_name)
-    blob_data = blob_client.download_blob()
-    model_data = blob_data.readall()  
-    
-    # Load the model from the downloaded data
-    model = CatBoostClassifier()
-    return model.load_model(model_data)
     
 @app.route('/')
 def home():
