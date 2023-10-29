@@ -66,7 +66,7 @@ def predict():
     
     # Extract data and convert to dataframe for prediction
     input_data = data.get('input_data', {})
-    input_df = pd.DataFrame([input_data])
+    input_df = pd.DataFrame([[input_data]])
     
     # Log the input data
     print(f"Input data: {input_df}")
