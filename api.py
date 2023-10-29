@@ -31,7 +31,9 @@ def load_model(team):
     model = CatBoostClassifier()
     return model.load_model(model_data)
     
-
+@app.route('/')
+def home():
+    return 'nateparis.github.io'
 
 @app.route('/predict', methods=['Post'])
 def predict():
