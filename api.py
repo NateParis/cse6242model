@@ -8,7 +8,7 @@ from flask_cors import CORS
 ###############################################################################
 
 app = Flask(__name)
-CORS(app, resources={r"/predict": {"origins": "https://nateparis.github.io"}})
+CORS(app, resources={r"/predict": {"origins": "*"}})
 
 
 # Initialize Azure Blob Service Client
