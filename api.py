@@ -40,13 +40,22 @@ def predict():
     data = request.get_json()
     team = data.get('posteam', 'SF')
     
+    # Log that a request has been received
+    print(f"Received a request for team: {team}")
+    
     # Generate the blob name for the model
     blob_name = f"{team}_classifier.cbm"
-
+    
+    # Log the blob name for debugging
+    print(f"Blob name: {blob_name}")    
+    
     # Download the model from Azure Blob Storage
     blob_client = blob_service_client.get_blob_client(container=container_name, blob=blob_name)
     blob_data = blob_client.download_blob()
-    model_data = blob_data.readall()  
+    model_data = blob_data.readall() 
+    
+    # Log when the model has been loaded
+    print("Model loaded successfully")
     
     # Load the model from the downloaded data
     model = CatBoostClassifier()
@@ -58,9 +67,15 @@ def predict():
     # Extract data for prediction
     input_data = data.get('input_data', {})
     
+    # Log the input data
+    print(f"Input data: {input_data}")
+    
     # Process the input data and make predictions
     playcall_labels = model.classes_
     playcall_probs = model.predict_proba(input_data)
+    
+    # Log when predictions have been made
+    print("Predictions made successfully")
     
     return jsonify({'predicted_plays': playcall_labels.tolist(), 'predicted_probs': playcall_probs.tolist()})
 
