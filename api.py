@@ -66,14 +66,14 @@ def predict():
     
     # Extract data and convert to dataframe for prediction
     input_data = data.get('input_data', {})
-    input_df = pd.DataFrame([[input_data]])
+    input_df = pd.DataFrame([input_data])
     
     # Log the input data
     print(f"Input data: {input_df}")
     
     # Process the input data and make predictions
     playcall_labels = model.classes_
-    playcall_probs = model.predict_proba(input_df)
+    playcall_probs = model.predict_proba([input_df])
     
     # Log when predictions have been made
     print("Predictions made successfully")
