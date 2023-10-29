@@ -7,6 +7,7 @@ from flask_cors import CORS
 import os
 import tempfile
 import shutil
+import pandas as pd
 
 ###############################################################################
 
@@ -63,15 +64,16 @@ def predict():
     if model is None:
         return jsonify({'error': f'Model for team {team} not found.'})
     
-    # Extract data for prediction
+    # Extract data and convert to dataframe for prediction
     input_data = data.get('input_data', {})
+    input_df = pd.DataFram([input_data])
     
     # Log the input data
-    print(f"Input data: {input_data}")
+    print(f"Input data: {input_df}")
     
     # Process the input data and make predictions
     playcall_labels = model.classes_
-    playcall_probs = model.predict_proba(input_data)
+    playcall_probs = model.predict_proba(input_df)
     
     # Log when predictions have been made
     print("Predictions made successfully")

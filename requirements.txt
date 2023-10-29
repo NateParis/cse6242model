@@ -3,3 +3,4 @@ catboost==1.2
 flask-cors==4.0.0
 werkzeug==2.2.2
 azure-storage-blob==12.9.0
+pandas==1.5.3
