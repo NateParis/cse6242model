@@ -57,8 +57,8 @@ def predict():
         model = CatBoostClassifier()
         model.load_model(temp_model_path)
     
-    # Ensure the temporary directory is cleaned up
-    shutil.rmtree(temp_dir)
+        # Ensure the temporary directory is cleaned up
+        shutil.rmtree(temp_dir)
     
     if model is None:
         return jsonify({'error': f'Model for team {team} not found.'})
