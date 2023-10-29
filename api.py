@@ -54,7 +54,7 @@ def predict():
     # Download the model from Azure Blob Storage
     blob_client = blob_service_client.get_blob_client(container=container_name, blob=blob_name)
     blob_data = blob_client.download_blob()
-    model_data = blob_data.readall() 
+    model_data = blob_data.readall().decode("utf-8")  # Decode model_data from bytes to string
     
     # Log when the model has been loaded
     print("Model loaded successfully")
