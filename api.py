@@ -30,7 +30,11 @@ def home():
 @app.route('/predict', methods=['Post'])
 def predict():
     data = request.get_json()
+    
+    # Log that the data was received correctly
     print(data)
+    print (f"posteam: {data['posteam']}")
+    
     team = data.get('posteam', 'SF')
     
     # Log that a request has been received
