@@ -29,13 +29,16 @@ def home():
 
 @app.route('/predict', methods=['Post'])
 def predict():
-    data = request.get_json()
+    json = request.get_json()
     
-    # Log that the data was received correctly
-    print(data)
-    print (f"posteam: {data['posteam']}")
+    # Extract data and convert to dataframe for prediction
+    input_data = json.get('input_data', {})
+    input_df = pd.DataFrame([input_data])
     
-    team = data.get('posteam', 'SF')
+    # Log the input data
+    print(f"Input data: {input_df}")
+    
+    team = input_df['posteam']
     
     # Log that a request has been received
     print(f"Received a request for team: {team}")
@@ -68,13 +71,6 @@ def predict():
     
     if model is None:
         return jsonify({'error': f'Model for team {team} not found.'})
-    
-    # Extract data and convert to dataframe for prediction
-    input_data = data.get('input_data', {})
-    input_df = pd.DataFrame([input_data])
-    
-    # Log the input data
-    print(f"Input data: {input_df}")
     
     # Process the input data and make predictions
     playcall_labels = model.classes_
