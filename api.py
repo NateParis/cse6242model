@@ -29,10 +29,10 @@ def home():
 
 @app.route('/predict', methods=['Post'])
 def predict():
-    json = request.get_json()
+    input_json = request.get_json()
     
     # Extract data and convert to dataframe for prediction
-    input_data = json.get('input_data', {})
+    input_data = input_json.get('input_data', {})
     input_df = pd.DataFrame([input_data])
     
     # Log the input data
