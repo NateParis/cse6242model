@@ -38,7 +38,7 @@ def predict():
     # Log the input data
     print(f"Input data: {input_df}")
     
-    team = input_df['posteam']
+    team = input_df['posteam'].iloc[0]
     
     # Log that a request has been received
     print(f"Received a request for team: {team}")
