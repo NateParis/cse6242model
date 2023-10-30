@@ -30,6 +30,7 @@ def home():
 @app.route('/predict', methods=['Post'])
 def predict():
     data = request.get_json()
+    print(data)
     team = data.get('posteam', 'SF')
     
     # Log that a request has been received
@@ -77,6 +78,7 @@ def predict():
     
     # Log when predictions have been made
     print("Predictions made successfully")
+    
     
     return jsonify({'predicted_plays': playcall_labels.tolist(), 'predicted_probs': playcall_probs.tolist()})
 
